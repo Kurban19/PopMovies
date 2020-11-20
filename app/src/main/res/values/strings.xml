@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">PopMovies</string>
+    <string name="title_activity_main2">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="action_settings">Настройки</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="search">Найти</string>
+    <string name="search_hint">Введите название</string>
+    <string name="search_alert">Введите название фильма</string>
+    <string name="rating">Рейтинг: %1$s</string>
+
+    <string name="previous">Previous</string>
+
+    <string name="list_empty">Список фильмов для просмотра пуст.\nВоспользуйтесь поиском.</string>
+    <string name="no_results_text">Ничего не найдено :(</string>
+    <string name="error">Ошибка, проверьте соединение или попробуйте позже :(</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+</resources>
