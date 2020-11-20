@@ -1,4 +1,4 @@
-package com.shkiper.popmovies.ui.fragments.home
+package com.shkiper.popmovies.ui.fragments.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.shkiper.popmovies.MainActivity
 import com.shkiper.popmovies.R
 import com.shkiper.popmovies.models.MovieItem
 import com.shkiper.popmovies.retrofit.ApiHelperImpl
@@ -48,15 +50,22 @@ class MainFragment : Fragment() {
 
     private fun initViews(){
         movieAdapter = MoviesAdapter{
-            val bundle = Bundle()
-            bundle.putString(AppConstants.MOVIE_ID, it.id)
-            val fragment = DescriptionFragment()
-            fragment.arguments = bundle
+//            val bundle = Bundle()
+//            bundle.putString(AppConstants.MOVIE_ID, it.id)
+//            val fragment = DescriptionFragment()
+//            fragment.arguments = bundle
+//
+//            requireActivity().supportFragmentManager.beginTransaction()
+//                .replace(R.id.mainLayout, fragment)
+//                .addToBackStack(null)
+//                .commitAllowingStateLoss()
+            val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetTheme)
 
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.mainLayout, fragment)
-                .addToBackStack(null)
-                .commitAllowingStateLoss()
+            val sheetView = LayoutInflater.from(requireContext()).inflate(R.layout.description_bottom_sheet,
+                    view?.findViewById(R.id.bottom_sheet))
+
+            bottomSheetDialog.setContentView(sheetView)
+            bottomSheetDialog.show()
         }
 
 
