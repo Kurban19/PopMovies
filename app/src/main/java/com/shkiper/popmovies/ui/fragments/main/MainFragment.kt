@@ -9,17 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.shkiper.popmovies.MainActivity
 import com.shkiper.popmovies.R
 import com.shkiper.popmovies.models.MovieItem
 import com.shkiper.popmovies.retrofit.ApiHelperImpl
 import com.shkiper.popmovies.retrofit.RetrofitBuilder
 import com.shkiper.popmovies.ui.adapters.MoviesAdapter
 import com.shkiper.popmovies.ui.custom.SpacingItemDecorator
-import com.shkiper.popmovies.ui.fragments.description.DescriptionFragment
+import com.shkiper.popmovies.ui.fragments.description.DescriptionSheetDialog
 import com.shkiper.popmovies.ui.fragments.search.SearchFragment
-import com.shkiper.popmovies.util.AppConstants
 import com.shkiper.popmovies.util.Status
 import com.shkiper.popmovies.util.ViewModelFactory
 import com.shkiper.popmovies.viewmodels.MainViewModel
@@ -59,13 +56,11 @@ class MainFragment : Fragment() {
 //                .replace(R.id.mainLayout, fragment)
 //                .addToBackStack(null)
 //                .commitAllowingStateLoss()
-            val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetTheme)
 
-            val sheetView = LayoutInflater.from(requireContext()).inflate(R.layout.description_bottom_sheet,
-                    view?.findViewById(R.id.bottom_sheet))
 
-            bottomSheetDialog.setContentView(sheetView)
-            bottomSheetDialog.show()
+            val bottomSheet = DescriptionSheetDialog()
+            fragmentManager?.let { it1 -> bottomSheet.show(it1, "exampleBottomSheet") }
+
         }
 
 
