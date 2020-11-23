@@ -17,6 +17,7 @@ import com.shkiper.popmovies.ui.adapters.MoviesAdapter
 import com.shkiper.popmovies.ui.custom.SpacingItemDecorator
 import com.shkiper.popmovies.ui.fragments.description.DescriptionSheetDialog
 import com.shkiper.popmovies.ui.fragments.search.SearchFragment
+import com.shkiper.popmovies.util.AppConstants
 import com.shkiper.popmovies.util.Status
 import com.shkiper.popmovies.util.ViewModelFactory
 import com.shkiper.popmovies.viewmodels.MainViewModel
@@ -57,9 +58,11 @@ class MainFragment : Fragment() {
 //                .addToBackStack(null)
 //                .commitAllowingStateLoss()
 
-
             val bottomSheet = DescriptionSheetDialog()
-            fragmentManager?.let { it1 -> bottomSheet.show(it1, "exampleBottomSheet") }
+            val bundle = Bundle()
+            bundle.putString(AppConstants.MOVIE_ID, it.id)
+            bottomSheet.arguments = bundle
+            fragmentManager?.let { it -> bottomSheet.show(it, "exampleBottomSheet") }
 
         }
 
@@ -84,10 +87,6 @@ class MainFragment : Fragment() {
 
 
         }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-
     }
 
     private fun setupObserver() {

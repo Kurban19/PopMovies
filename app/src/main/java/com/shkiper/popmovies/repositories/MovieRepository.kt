@@ -12,9 +12,9 @@ object MovieRepository {
     private var movies: MutableLiveData<List<Movie>> = mutableLiveData(listOf())
 
 
-    fun find(movieId: String): Movie? {
+    fun find(movieId: String): Movie {
         val ind = movies.value!!.indexOfFirst { it.id == movieId}
-        return movies.value!!.getOrNull(ind)
+        return movies.value!![ind]
     }
 
     fun setMovies(source: List<Movie>){
