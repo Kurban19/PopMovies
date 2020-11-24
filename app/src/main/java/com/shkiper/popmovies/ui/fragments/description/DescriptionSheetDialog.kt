@@ -15,14 +15,20 @@ import kotlinx.android.synthetic.main.description_bottom_sheet.*
 
 class DescriptionSheetDialog : BottomSheetDialogFragment(){
 
+    companion object{
+        fun getNewInstance(movieId: String): DescriptionSheetDialog {
+            val sheetDialog = DescriptionSheetDialog()
+            sheetDialog.arguments?.putString(AppConstants.MOVIE_ID, movieId)
+            return sheetDialog
+        }
+    }
+
     private val TAG = "SheetDialog"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-
         return inflater.inflate(R.layout.description_bottom_sheet, container, false)
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

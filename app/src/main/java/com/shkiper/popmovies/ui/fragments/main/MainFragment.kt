@@ -48,20 +48,8 @@ class MainFragment : Fragment() {
 
     private fun initViews(){
         movieAdapter = MoviesAdapter{
-//            val bundle = Bundle()
-//            bundle.putString(AppConstants.MOVIE_ID, it.id)
-//            val fragment = DescriptionFragment()
-//            fragment.arguments = bundle
-//
-//            requireActivity().supportFragmentManager.beginTransaction()
-//                .replace(R.id.mainLayout, fragment)
-//                .addToBackStack(null)
-//                .commitAllowingStateLoss()
 
-            val bottomSheet = DescriptionSheetDialog()
-            val bundle = Bundle()
-            bundle.putString(AppConstants.MOVIE_ID, it.id)
-            bottomSheet.arguments = bundle
+            val bottomSheet = DescriptionSheetDialog.getNewInstance(it.id)
             fragmentManager?.let { it -> bottomSheet.show(it, "exampleBottomSheet") }
 
         }
