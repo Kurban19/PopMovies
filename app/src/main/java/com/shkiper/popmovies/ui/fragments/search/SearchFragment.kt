@@ -21,9 +21,8 @@ import kotlinx.android.synthetic.main.fragment_search.*
 
 class SearchFragment : Fragment() {
 
-
-    private lateinit var movieAdapter: MoviesAdapter
     private lateinit var viewModel: SearchViewModel
+
 
 
     override fun onCreateView(

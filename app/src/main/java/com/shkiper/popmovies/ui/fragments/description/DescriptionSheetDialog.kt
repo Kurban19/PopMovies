@@ -16,9 +16,9 @@ import kotlinx.android.synthetic.main.description_bottom_sheet.*
 class DescriptionSheetDialog : BottomSheetDialogFragment(){
 
     companion object{
-        fun getNewInstance(movieId: String): DescriptionSheetDialog {
+        fun getNewInstance(args: Bundle): DescriptionSheetDialog {
             val sheetDialog = DescriptionSheetDialog()
-            sheetDialog.arguments?.putString(AppConstants.MOVIE_ID, movieId)
+            sheetDialog.arguments = args
             return sheetDialog
         }
     }
@@ -39,7 +39,6 @@ class DescriptionSheetDialog : BottomSheetDialogFragment(){
 
     private fun initViews(){
         val movie = MovieRepository.find(arguments?.getString(AppConstants.MOVIE_ID) ?: "something went wrong")
-
 
         if(movie.image != null){
             Glide.with(this)

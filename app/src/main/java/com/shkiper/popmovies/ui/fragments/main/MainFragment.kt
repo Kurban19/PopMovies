@@ -1,11 +1,13 @@
 package com.shkiper.popmovies.ui.fragments.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,16 +43,19 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initViewModel()
         initViews()
+        initViewModel()
         setupObserver()
     }
+
 
     private fun initViews(){
         movieAdapter = MoviesAdapter{
 
-            val bottomSheet = DescriptionSheetDialog.getNewInstance(it.id)
-            fragmentManager?.let { it -> bottomSheet.show(it, "exampleBottomSheet") }
+            val bundle = Bundle()
+            bundle.putString(AppConstants.MOVIE_ID, it.id)
+            val bottomSheet = DescriptionSheetDialog.getNewInstance(bundle)
+            bottomSheet.show(childFragmentManager, "startBottomSheet")
 
         }
 
@@ -71,10 +76,15 @@ class MainFragment : Fragment() {
                     "searchFragment started"
                 )
                 .addToBackStack(null)
-                .commitAllowingStateLoss()
+                .commit()
+
 
 
         }
+    }
+
+    private fun initViewModel(){
+        viewModel =  ViewModelProviders.of(this, ViewModelFactory(ApiHelperImpl(RetrofitBuilder.apiService))).get(MainViewModel::class.java)
     }
 
     private fun setupObserver() {
@@ -82,8 +92,8 @@ class MainFragment : Fragment() {
             when (it.status) {
                 Status.SUCCESS -> {
                     progressBar.visibility = View.GONE
-                    val movies = it.data?.map { it -> it.toMovieItem() }
-                    renderList(movies!!)
+                    val movies = it.data?.map { it -> it.toMovieItem() } ?: emptyList()
+                    renderList(movies)
                     recyclerView.visibility = View.VISIBLE
                 }
                 Status.LOADING -> {
@@ -101,9 +111,5 @@ class MainFragment : Fragment() {
 
     private fun renderList(movies: List<MovieItem>) {
         movieAdapter.updateData(movies)
-    }
-
-    private fun initViewModel(){
-        viewModel =  ViewModelProviders.of(this, ViewModelFactory(ApiHelperImpl(RetrofitBuilder.apiService))).get(MainViewModel::class.java)
     }
 }
