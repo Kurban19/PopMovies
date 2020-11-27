@@ -8,12 +8,18 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.shkiper.popmovies.R
+import com.shkiper.popmovies.models.Movie
 import com.shkiper.popmovies.repositories.MovieRepository
+import com.shkiper.popmovies.retrofit.RetrofitBuilder
 import com.shkiper.popmovies.util.AppConstants
 import kotlinx.android.synthetic.main.description_bottom_sheet.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class DescriptionSheetDialog : BottomSheetDialogFragment(){
+
+    private lateinit var movie: Movie
 
     companion object{
         fun getNewInstance(args: Bundle): DescriptionSheetDialog {
@@ -38,7 +44,14 @@ class DescriptionSheetDialog : BottomSheetDialogFragment(){
     }
 
     private fun initViews(){
-        val movie = MovieRepository.find(arguments?.getString(AppConstants.MOVIE_ID) ?: "something went wrong")
+
+        GlobalScope.launch {
+            movie = RetrofitBuilder.apiService.findById(arguments?.getString(
+                    AppConstants.MOVIE_ID)
+                    ?: "0", language = "ru").results?.get(0) ?: Movie("23242", "fslkdfjs", "fl;k2jlkfsj", "99", "lkdsjfksdj", "fkdslfjlksjf")
+
+        }
+//        val movie = MovieRepository.find(arguments?.getString(AppConstants.MOVIE_ID) ?: "something went wrong")
 
         if(movie.image != null){
             Glide.with(this)
@@ -54,6 +67,4 @@ class DescriptionSheetDialog : BottomSheetDialogFragment(){
         tv_movie_description.text = movie.description
 
     }
-
-
 }

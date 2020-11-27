@@ -13,17 +13,16 @@ import com.shkiper.popmovies.models.Movie
 import com.shkiper.popmovies.retrofit.ApiHelperImpl
 import com.shkiper.popmovies.retrofit.RetrofitBuilder
 import com.shkiper.popmovies.ui.adapters.MoviesAdapter
+import com.shkiper.popmovies.ui.fragments.description.DescriptionSheetDialog
+import com.shkiper.popmovies.util.AppConstants
 import com.shkiper.popmovies.util.Status
 import com.shkiper.popmovies.util.ViewModelFactory
 import com.shkiper.popmovies.viewmodels.SearchViewModel
 import kotlinx.android.synthetic.main.fragment_search.*
 
-
 class SearchFragment : Fragment() {
 
     private lateinit var viewModel: SearchViewModel
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -90,7 +89,12 @@ class SearchFragment : Fragment() {
     }
 
     private fun showMovies(movies: List<Movie>) {
-        val moviesAdapter = MoviesAdapter{Snackbar.make(results_recycler_view,"Click on ${it.title}", Snackbar.LENGTH_LONG).show()}
+        val moviesAdapter = MoviesAdapter{
+            val bundle = Bundle()
+            bundle.putString(AppConstants.MOVIE_ID, it.id)
+            val descriptionDialog = DescriptionSheetDialog.getNewInstance(bundle)
+            descriptionDialog.show(childFragmentManager, "startDescriptionDialog")
+        }
         moviesAdapter.updateData(movies.map { it.toMovieItem() })
         results_recycler_view.adapter = moviesAdapter
         results_recycler_view.visibility = View.VISIBLE

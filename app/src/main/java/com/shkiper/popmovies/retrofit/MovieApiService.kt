@@ -24,5 +24,12 @@ interface MovieApiService {
         @Query("query") searchQuery: String
     ): MovieResponse
 
+    @GET("/movie")
+    suspend fun findById(
+            @Query("movie_id") movieId : String,
+            @Query("api_key") apiKey: String = API_KEY,
+            @Query("language") language: String
+    ): MovieResponse
+
 
 }

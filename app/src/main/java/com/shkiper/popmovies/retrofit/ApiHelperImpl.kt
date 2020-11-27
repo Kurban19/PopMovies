@@ -13,4 +13,10 @@ class ApiHelperImpl(private val apiService: MovieApiService): ApiHelper {
         searchQuery: String
     ) = apiService.searchMovies(apiKey, language, searchQuery)
 
+    override suspend fun findById(
+            apiKey: String,
+            language: String,
+            movieId: String) = apiService.findById(movieId, apiKey, language)
+
+
 }

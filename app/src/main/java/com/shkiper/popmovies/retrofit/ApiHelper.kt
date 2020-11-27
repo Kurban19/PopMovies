@@ -9,4 +9,6 @@ interface ApiHelper {
 
     suspend fun searchMovies(apiKey: String = AppConstants.API_KEY, language: String, searchQuery: String): MovieResponse
 
+    suspend fun findById(apiKey: String = AppConstants.API_KEY, language: String, movieId: String): MovieResponse
+
 }
