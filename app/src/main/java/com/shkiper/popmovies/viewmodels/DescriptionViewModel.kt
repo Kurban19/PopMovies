@@ -1,5 +1,6 @@
 package com.shkiper.popmovies.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,14 +21,15 @@ class DescriptionViewModel(private val apiHelper: ApiHelper, private val movieId
         viewModelScope.launch {
             movie.postValue(Resource.loading(null))
             try {
-                val movieFromApi = apiHelper.findById(movieId = movieId, language = "ru")
-                movie.postValue(Resource.success(movieFromApi.results?.get(0)))
+                val responseFromApi = apiHelper.findById(movieId = movieId, language = "ru")
+                val movieFromApi = responseFromApi.results!!.first()
+
+                movie.postValue(Resource.success(movieFromApi))
             } catch (e: Exception) {
                 movie.postValue(Resource.error(e.toString(), null))
             }
         }
     }
-
     fun getMovie(): MutableLiveData<Resource<Movie>> {
         return movie
     }

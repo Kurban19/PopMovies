@@ -4,8 +4,8 @@ package com.shkiper.popmovies.retrofit
 import com.shkiper.popmovies.util.AppConstants.API_KEY
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
-
 
 
 interface MovieApiService {
@@ -24,9 +24,9 @@ interface MovieApiService {
         @Query("query") searchQuery: String
     ): MovieResponse
 
-    @GET("/movie")
+    @GET("movie/{movie_id}")
     suspend fun findById(
-            @Query("movie_id") movieId : String,
+            @Path("movie_id") movieId : String,
             @Query("api_key") apiKey: String = API_KEY,
             @Query("language") language: String
     ): MovieResponse
