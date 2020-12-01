@@ -1,8 +1,10 @@
 package com.shkiper.popmovies.retrofit
 
 
+import com.shkiper.popmovies.models.Movie
 import com.shkiper.popmovies.util.AppConstants.API_KEY
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -29,7 +31,6 @@ interface MovieApiService {
             @Path("movie_id") movieId : String,
             @Query("api_key") apiKey: String = API_KEY,
             @Query("language") language: String
-    ): MovieResponse
-
+    ): Response<Movie>
 
 }

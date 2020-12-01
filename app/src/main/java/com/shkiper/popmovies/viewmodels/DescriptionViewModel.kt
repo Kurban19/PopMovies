@@ -22,7 +22,8 @@ class DescriptionViewModel(private val apiHelper: ApiHelper, private val movieId
             movie.postValue(Resource.loading(null))
             try {
                 val responseFromApi = apiHelper.findById(movieId = movieId, language = "ru")
-                val movieFromApi = responseFromApi.results!!.first()
+
+                val movieFromApi = responseFromApi.body()
 
                 movie.postValue(Resource.success(movieFromApi))
             } catch (e: Exception) {

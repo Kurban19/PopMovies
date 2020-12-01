@@ -1,7 +1,9 @@
 package com.shkiper.popmovies.retrofit
 
+import com.shkiper.popmovies.models.Movie
 import com.shkiper.popmovies.util.AppConstants
 import retrofit2.Call
+import retrofit2.Response
 
 interface ApiHelper {
 
@@ -9,6 +11,6 @@ interface ApiHelper {
 
     suspend fun searchMovies(apiKey: String = AppConstants.API_KEY, language: String, searchQuery: String): MovieResponse
 
-    suspend fun findById(apiKey: String = AppConstants.API_KEY, language: String, movieId: String): MovieResponse
+    suspend fun findById(apiKey: String = AppConstants.API_KEY, language: String, movieId: String): Response<Movie>
 
 }
