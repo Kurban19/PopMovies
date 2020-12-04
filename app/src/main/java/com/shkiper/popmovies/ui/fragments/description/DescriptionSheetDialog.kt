@@ -1,6 +1,7 @@
 package com.shkiper.popmovies.ui.fragments.description
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,6 +43,10 @@ class DescriptionSheetDialog : BottomSheetDialogFragment(){
         initViewModel()
         setupObserver()
 
+    }
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Log.d("Tag", "onSaveInstanceState Called in Description Dialog")
     }
 
     private fun initViewModel(){

@@ -1,6 +1,7 @@
 package com.shkiper.popmovies.ui.fragments.search
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,9 +36,7 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         initViewModel()
-
 
         search_button.setOnClickListener {
             val query = search_edit_text.text.toString().trim()
@@ -49,6 +48,11 @@ class SearchFragment : Fragment() {
         }
     }
 
+    private fun initViewModel(){
+        viewModel =  ViewModelProviders.of(this, ViewModelFactory(ApiHelperImpl(RetrofitBuilder.apiService))).get(
+                SearchViewModel::class.java)
+    }
+
     private fun findMovies(query: String) {
         showLoader()
         viewModel.findMovies(query)
@@ -56,7 +60,13 @@ class SearchFragment : Fragment() {
             when(it.status){
                 Status.SUCCESS ->{
                     hideLoader()
-                    showMovies(it.data!!)
+                    if(it.data!!.isNotEmpty()){
+                        showMovies(it.data)
+                    }
+                    else{
+                        showEmptyMovies()
+                    }
+
                 }
                 Status.LOADING ->{
                     showLoader()
@@ -101,9 +111,9 @@ class SearchFragment : Fragment() {
         no_results_placeholder.visibility = View.GONE
     }
 
-    private fun initViewModel(){
-        viewModel =  ViewModelProviders.of(this, ViewModelFactory(ApiHelperImpl(RetrofitBuilder.apiService))).get(
-            SearchViewModel::class.java)
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Log.d("Tag", "onSaveInstanceState Called in SearchFragment")
     }
 
 }

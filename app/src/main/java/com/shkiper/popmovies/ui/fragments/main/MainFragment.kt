@@ -49,14 +49,14 @@ class MainFragment : Fragment() {
     }
 
 
+
     private fun initViews(){
         movieAdapter = MoviesAdapter{
-
             val bundle = Bundle()
             bundle.putString(AppConstants.MOVIE_ID, it.id)
             val bottomSheet = DescriptionSheetDialog.getNewInstance(bundle)
+            Log.d("Tag", "Fragment Transaction Commit")
             bottomSheet.show(childFragmentManager, "startBottomSheet")
-
         }
 
 
@@ -70,6 +70,7 @@ class MainFragment : Fragment() {
 
         fab.setOnClickListener{
             val searchFragment = SearchFragment()
+            Log.d("Tag", "Fragment Transaction Commit")
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.mainLayout,
                     searchFragment,
@@ -79,8 +80,12 @@ class MainFragment : Fragment() {
                 .commit()
         }
     }
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Log.d("Tag", "onSaveInstanceState Called")
+    }
 
-    private fun initViewModel(){
+        private fun initViewModel(){
         viewModel =  ViewModelProviders.of(this, ViewModelFactory(ApiHelperImpl(RetrofitBuilder.apiService))).get(MainViewModel::class.java)
     }
 

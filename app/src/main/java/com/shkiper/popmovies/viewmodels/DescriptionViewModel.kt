@@ -31,6 +31,8 @@ class DescriptionViewModel(private val apiHelper: ApiHelper, private val movieId
             }
         }
     }
+
+
     fun getMovie(): MutableLiveData<Resource<Movie>> {
         return movie
     }
