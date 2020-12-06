@@ -36,6 +36,20 @@ class MainViewModel(private val apiHelper: ApiHelper): ViewModel() {
         }
     }
 
+
+    fun searchMovies(query: String){
+        viewModelScope.launch {
+            movies.postValue(Resource.loading(null))
+            try {
+                val moviesFromApi = apiHelper.searchMovies(language = "ru", searchQuery = query)
+                movies.postValue(Resource.success(moviesFromApi.results))
+                repository.setMovies(moviesFromApi.results!!)
+            } catch (e: Exception) {
+                movies.postValue(Resource.error(e.toString(), null))
+            }
+        }
+    }
+
     fun getMovies(): LiveData<Resource<List<Movie>>>? {
         return movies
     }

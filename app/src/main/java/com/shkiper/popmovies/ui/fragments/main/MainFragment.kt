@@ -37,6 +37,7 @@ class MainFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("Tag", "Fragment view created")
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
@@ -49,16 +50,14 @@ class MainFragment : Fragment() {
     }
 
 
-
     private fun initViews(){
         movieAdapter = MoviesAdapter{
             val bundle = Bundle()
             bundle.putString(AppConstants.MOVIE_ID, it.id)
             val bottomSheet = DescriptionSheetDialog.getNewInstance(bundle)
-            Log.d("Tag", "Fragment Transaction Commit")
             bottomSheet.show(childFragmentManager, "startBottomSheet")
+            viewModel.searchMovies("дедпул")
         }
-
 
         val divider = SpacingItemDecorator(20)
 
@@ -82,7 +81,7 @@ class MainFragment : Fragment() {
     }
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        Log.d("Tag", "onSaveInstanceState Called")
+        Log.e("Tag", "onSaveInstanceState Called")
     }
 
         private fun initViewModel(){

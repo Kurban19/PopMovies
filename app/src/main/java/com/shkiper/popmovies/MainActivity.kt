@@ -15,4 +15,5 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
         Log.d("Tag", "onSaveInstanceState Called")
     }
+
 }
