@@ -41,6 +41,7 @@ class MainFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -56,7 +57,6 @@ class MainFragment : Fragment() {
             bundle.putString(AppConstants.MOVIE_ID, it.id)
             val bottomSheet = DescriptionSheetDialog.getNewInstance(bundle)
             bottomSheet.show(childFragmentManager, "startBottomSheet")
-            viewModel.searchMovies("дедпул")
         }
 
         val divider = SpacingItemDecorator(20)
@@ -81,7 +81,12 @@ class MainFragment : Fragment() {
     }
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        Log.e("Tag", "onSaveInstanceState Called")
+        Log.e("Tag", "onSaveInstanceState Called in MainFragment")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("Tag", "onResume Called in MainFragment")
     }
 
         private fun initViewModel(){

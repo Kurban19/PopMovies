@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
@@ -43,10 +44,6 @@ class DescriptionSheetDialog : BottomSheetDialogFragment(){
         initViewModel()
         setupObserver()
 
-    }
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        Log.d("Tag", "onSaveInstanceState Called in Description Dialog")
     }
 
     private fun initViewModel(){
