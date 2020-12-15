@@ -41,6 +41,8 @@ class DescriptionSheetDialog : BottomSheetDialogFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Log.d("Tag", "onViewCreated Called in Dialog")
+
         initViewModel()
         setupObserver()
 
@@ -88,6 +90,11 @@ class DescriptionSheetDialog : BottomSheetDialogFragment(){
         tv_movie_date_description.text = movie.releaseDate
         tv_movie_rating_description.text = movie.rating
         tv_movie_description.text = movie.description
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Log.d("Tag", "onSaveInstanceState Called in Dialog")
     }
 
 }

@@ -37,7 +37,6 @@ class MainFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("Tag", "Fragment view created")
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
@@ -69,7 +68,6 @@ class MainFragment : Fragment() {
 
         fab.setOnClickListener{
             val searchFragment = SearchFragment()
-            Log.d("Tag", "Fragment Transaction Commit")
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.mainLayout,
                     searchFragment,
@@ -81,12 +79,7 @@ class MainFragment : Fragment() {
     }
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        Log.e("Tag", "onSaveInstanceState Called in MainFragment")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("Tag", "onResume Called in MainFragment")
+        Log.d("Tag", "onSaveInstanceState Called in MainFragment")
     }
 
         private fun initViewModel(){
@@ -107,7 +100,6 @@ class MainFragment : Fragment() {
                     recyclerView.visibility = View.GONE
                 }
                 Status.ERROR -> {
-                    //Handle Error
                     progressBar.visibility = View.GONE
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                 }

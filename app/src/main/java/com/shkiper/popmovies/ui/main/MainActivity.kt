@@ -11,11 +11,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
+        Log.d("Tag", "onCreate called in MainActivity")
     }
-
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        Log.e("Tag", "onSaveInstanceState Called in MainActivity")
+        Log.d("Tag", "onSaveInstanceState Called in MainActivity")
     }
 }
