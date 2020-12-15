@@ -5,14 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shkiper.popmovies.models.Movie
-import com.shkiper.popmovies.repositories.MovieRepository
 import com.shkiper.popmovies.retrofit.ApiHelper
 import com.shkiper.popmovies.util.Resource
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val apiHelper: ApiHelper): ViewModel() {
 
-    private var repository = MovieRepository
     private val movies = MutableLiveData<Resource<List<Movie>>>()
 
     companion object{
@@ -29,7 +27,6 @@ class MainViewModel(private val apiHelper: ApiHelper): ViewModel() {
             try {
                 val moviesFromApi = apiHelper.getPopularMovies(language = "ru")
                 movies.postValue(Resource.success(moviesFromApi.results))
-                repository.setMovies(moviesFromApi.results!!)
             } catch (e: Exception) {
                 movies.postValue(Resource.error(e.toString(), null))
             }
@@ -43,7 +40,6 @@ class MainViewModel(private val apiHelper: ApiHelper): ViewModel() {
             try {
                 val moviesFromApi = apiHelper.searchMovies(language = "ru", searchQuery = query)
                 movies.postValue(Resource.success(moviesFromApi.results))
-                repository.setMovies(moviesFromApi.results!!)
             } catch (e: Exception) {
                 movies.postValue(Resource.error(e.toString(), null))
             }

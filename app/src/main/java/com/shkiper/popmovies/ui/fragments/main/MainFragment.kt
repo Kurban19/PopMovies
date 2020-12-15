@@ -50,10 +50,15 @@ class MainFragment : Fragment() {
     }
 
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Log.d("Tag", "onSaveInstanceState Called in MainFragment")
+    }
     private fun initViews(){
         movieAdapter = MoviesAdapter{
             val bundle = Bundle()
             bundle.putString(AppConstants.MOVIE_ID, it.id)
+            Log.d("Tag", "Fragment Transaction Commit")
             val bottomSheet = DescriptionSheetDialog.getNewInstance(bundle)
             bottomSheet.show(childFragmentManager, "startBottomSheet")
         }
@@ -76,10 +81,6 @@ class MainFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
-    }
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        Log.d("Tag", "onSaveInstanceState Called in MainFragment")
     }
 
         private fun initViewModel(){

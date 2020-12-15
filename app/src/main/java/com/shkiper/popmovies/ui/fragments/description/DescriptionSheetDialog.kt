@@ -41,8 +41,6 @@ class DescriptionSheetDialog : BottomSheetDialogFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.d("Tag", "onViewCreated Called in Dialog")
-
         initViewModel()
         setupObserver()
 

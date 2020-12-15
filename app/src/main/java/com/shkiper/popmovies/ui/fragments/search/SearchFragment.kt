@@ -115,5 +115,4 @@ class SearchFragment : Fragment() {
         super.onSaveInstanceState(outState)
         Log.d("Tag", "onSaveInstanceState Called in SearchFragment")
     }
-
 }
