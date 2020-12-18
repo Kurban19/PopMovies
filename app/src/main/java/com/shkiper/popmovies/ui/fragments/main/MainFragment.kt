@@ -49,11 +49,6 @@ class MainFragment : Fragment() {
         setupObserver()
     }
 
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        Log.d("Tag", "onSaveInstanceState Called in MainFragment")
-    }
     private fun initViews(){
         movieAdapter = MoviesAdapter{
             val bundle = Bundle()
@@ -74,7 +69,7 @@ class MainFragment : Fragment() {
         fab.setOnClickListener{
             val searchFragment = SearchFragment()
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.mainLayout,
+                .replace(R.id.nav_host_fragment,
                     searchFragment,
                     "searchFragment started"
                 )

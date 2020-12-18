@@ -110,9 +110,4 @@ class SearchFragment : Fragment() {
         results_recycler_view.visibility = View.VISIBLE
         no_results_placeholder.visibility = View.GONE
     }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        Log.d("Tag", "onSaveInstanceState Called in SearchFragment")
-    }
 }

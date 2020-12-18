@@ -90,9 +90,4 @@ class DescriptionSheetDialog : BottomSheetDialogFragment(){
         tv_movie_description.text = movie.description
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        Log.d("Tag", "onSaveInstanceState Called in Dialog")
-    }
-
 }
